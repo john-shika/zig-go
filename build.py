@@ -56,10 +56,17 @@ def copy_libs():
         shutil.copy(os.path.join(ROOT_DIR, "lib/win32", f"dl.{dl_ext}"), output_path)
     
     zig_output_path = os.path.join(ROOT_DIR, "zig-out")
-    shutil.copy(os.path.join(zig_output_path, "bin/app.exe"), output_path)
-    shutil.copy(os.path.join(zig_output_path, "bin/app.dll"), output_path)
-    shutil.copy(os.path.join(zig_output_path, "bin/app.pdb"), output_path)
-    shutil.copy(os.path.join(zig_output_path, "lib/app.lib"), output_path)
+    
+    if is_win():
+        shutil.copy(os.path.join(zig_output_path, "bin/app.exe"), output_path)
+        shutil.copy(os.path.join(zig_output_path, "bin/app.dll"), output_path)
+        shutil.copy(os.path.join(zig_output_path, "bin/app.pdb"), output_path)
+        shutil.copy(os.path.join(zig_output_path, "lib/app.lib"), output_path)
+    
+    else:
+        shutil.copy(os.path.join(zig_output_path, "bin/app"), output_path)
+        shutil.copy(os.path.join(zig_output_path, "lib/libapp.a"), output_path)
+        shutil.copy(os.path.join(zig_output_path, "lib/libapp.so"), output_path)
     
     print("Shared libraries copied successfully.")
 
@@ -71,5 +78,5 @@ def zig_build():
     subprocess.run(zig_args)
     copy_libs()
 
-if __name__ == "__main__":
+if str(__name__).upper() in ("__MAIN__",):
     zig_build()

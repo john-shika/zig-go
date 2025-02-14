@@ -6,12 +6,16 @@ if (WIN32)
     # add_subdirectory(dlfcn-win32)
     include_directories(include/win32)
     link_directories(lib/win32)
-    set(OUTPUT_NAME loader)
     set(DL_EXT dll)
 else()
-    set(OUTPUT_NAME libloader)
     set(DL_EXT so)
 endif()
+
+# Add relative path
+set_target_properties(loader PROPERTIES
+    INSTALL_RPATH_USE_LINK_PATH TRUE
+    INSTALL_RPATH "."
+)
 
 # Add subdirectories for each Go library
 add_subdirectory(sum)
@@ -20,7 +24,6 @@ add_subdirectory(multiply)
 # C library (loader)
 add_library(loader SHARED loader.c)
 target_link_libraries(loader dl)
-set_target_properties(loader PROPERTIES OUTPUT_NAME ${OUTPUT_NAME})
 
 if (WIN32)
     if (BUILD_SHARED_LIBS)

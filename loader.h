@@ -16,9 +16,9 @@
 typedef int (*sum_func)(int, int);
 typedef int (*multiply_func)(int, int);
 
-DLLEXPORT void *load_library(const char *path);
+DLLEXPORT void *open_library(const char *path);
 DLLEXPORT void close_library(void *handle);
-DLLEXPORT sum_func load_sum_function(void *handle);
-DLLEXPORT multiply_func load_multiply_function(void *handle);
+DLLEXPORT sum_func create_sum_function(void *handle);
+DLLEXPORT multiply_func create_multiply_function(void *handle);
 
 #endif // LOADER_H

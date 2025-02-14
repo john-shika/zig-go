@@ -42,6 +42,9 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(exe);
 
+    // add relative path
+    exe.addRPath(b.path("."));
+
     // add include path
     exe.addIncludePath(b.path("."));
     exe.addIncludePath(b.path("include"));
