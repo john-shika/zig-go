@@ -17,11 +17,11 @@ pub fn build(b: *std.Build) void {
     });
 
     // register imports
-    exe_mod.addImport("zig_composer_lib", lib_mod);
+    exe_mod.addImport("app_lib", lib_mod);
 
     const lib = b.addLibrary(.{
         .linkage = .static,
-        .name = "zig_composer",
+        .name = "app",
         .root_module = lib_mod,
     });
 
@@ -29,14 +29,14 @@ pub fn build(b: *std.Build) void {
 
     const lib_dyn = b.addLibrary(.{
         .linkage = .dynamic,
-        .name = "zig_composer",
+        .name = "app",
         .root_module = lib_mod,
     });
 
     b.installArtifact(lib_dyn);
 
     const exe = b.addExecutable(.{
-        .name = "zig_composer",
+        .name = "app",
         .root_module = exe_mod,
     });
 

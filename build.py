@@ -56,10 +56,10 @@ def copy_libs():
         shutil.copy(os.path.join(ROOT_DIR, "lib/win32", f"dl.{dl_ext}"), output_path)
     
     zig_output_path = os.path.join(ROOT_DIR, "zig-out")
-    shutil.copy(os.path.join(zig_output_path, "bin/zig_composer.exe"), output_path)
-    shutil.copy(os.path.join(zig_output_path, "bin/zig_composer.dll"), output_path)
-    shutil.copy(os.path.join(zig_output_path, "bin/zig_composer.pdb"), output_path)
-    shutil.copy(os.path.join(zig_output_path, "lib/zig_composer.lib"), output_path)
+    shutil.copy(os.path.join(zig_output_path, "bin/app.exe"), output_path)
+    shutil.copy(os.path.join(zig_output_path, "bin/app.dll"), output_path)
+    shutil.copy(os.path.join(zig_output_path, "bin/app.pdb"), output_path)
+    shutil.copy(os.path.join(zig_output_path, "lib/app.lib"), output_path)
     
     print("Shared libraries copied successfully.")
 
