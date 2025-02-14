@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "*.embeddedhtml": "html",
+    "atomic": "c",
+    "cstdlib": "c",
+    "memory": "c",
+    "xlocale": "c",
+    "xlocinfo": "c",
+    "xlocnum": "c",
+    "xmemory": "c",
+    "stdlib.h": "c",
+    "stdio.h": "c"
+  }
+}

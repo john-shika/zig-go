@@ -1,0 +1,5 @@
+!.vscode/settings.json
+.zig-cache/
+build/
+out/
+zig-out/
