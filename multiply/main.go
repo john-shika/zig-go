@@ -1,15 +1,16 @@
 package main
 
 import (
-    "C"
-    "fmt"
+	"C"
+	"fmt"
 )
 
 //export Multiply
 func Multiply(a, b C.int) C.int {
-    return a * b
+	return a * b
 }
 
 func main() {
-    fmt.Println("Hello from Go Multiply Library")
+	fmt.Println("Hello from Go Multiply Library")
+	<-make(chan int)
 }

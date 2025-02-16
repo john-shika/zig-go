@@ -10,11 +10,8 @@ else()
     set(DL_EXT so)
 endif()
 
-# Add relative path
-set_target_properties(loader PROPERTIES
-    INSTALL_RPATH_USE_LINK_PATH TRUE
-    INSTALL_RPATH "."
-)
+# Set CGO flags for linking dynamic
+set(ENV{CGO_LDFLAGS} "-Wl,-rpath,.")
 
 # Go build command for the shared library
 add_custom_command(

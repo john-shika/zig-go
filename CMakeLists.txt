@@ -11,19 +11,19 @@ else()
     set(DL_EXT so)
 endif()
 
-# Add relative path
-set_target_properties(loader PROPERTIES
-    INSTALL_RPATH_USE_LINK_PATH TRUE
-    INSTALL_RPATH "."
-)
-
 # Add subdirectories for each Go library
 add_subdirectory(sum)
 add_subdirectory(multiply)
 
 # C library (loader)
-add_library(loader SHARED loader.c)
+add_library(loader SHARED src/loader.c)
 target_link_libraries(loader dl)
+
+# Add relative path
+set_target_properties(loader PROPERTIES
+    INSTALL_RPATH_USE_LINK_PATH TRUE
+    INSTALL_RPATH "."
+)
 
 if (WIN32)
     if (BUILD_SHARED_LIBS)

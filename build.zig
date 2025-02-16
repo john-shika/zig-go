@@ -47,6 +47,7 @@ pub fn build(b: *std.Build) void {
 
     // add include path
     exe.addIncludePath(b.path("."));
+    exe.addIncludePath(b.path("src"));
     exe.addIncludePath(b.path("include"));
 
     if (target.result.os.tag == .windows) {
@@ -55,6 +56,7 @@ pub fn build(b: *std.Build) void {
 
     // add library path
     exe.addLibraryPath(b.path("."));
+    exe.addLibraryPath(b.path("src"));
     exe.addLibraryPath(b.path("build"));
     exe.addLibraryPath(b.path("lib"));
 

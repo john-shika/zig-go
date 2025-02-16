@@ -1,7 +1,10 @@
 const std = @import("std");
 const builtin = @import("builtin");
 
-const c = @cImport(@cInclude("loader.h"));
+const c = @cImport({
+    if (isWin()) @cDefine("LOADER_WIN32_SHARED", "1");
+    @cInclude("loader.h");
+});
 
 fn isWin() bool {
     return builtin.os.tag == .windows;
@@ -17,8 +20,13 @@ pub fn main() void {
         }
         defer c.close_library(libsum);
 
-        const sum = c.create_sum_function(libsum);
-        const sum_result = sum.?(2, 3);
+        const sum_func = c.create_sum_function(libsum);
+        if (sum_func == null) {
+            std.debug.print("Failed to create sum function\n", .{});
+            return;
+        }
+
+        const sum_result = sum_func.?(2, 3);
         std.debug.print("Sum: {}\n", .{sum_result});
     }
 
@@ -31,8 +39,13 @@ pub fn main() void {
         }
         defer c.close_library(libmultiply);
 
-        const multiply = c.create_multiply_function(libmultiply);
-        const multiply_result = multiply.?(2, 3);
+        const multiply_func = c.create_multiply_function(libmultiply);
+        if (multiply_func == null) {
+            std.debug.print("Failed to create sum function\n", .{});
+            return;
+        }
+
+        const multiply_result = multiply_func.?(2, 3);
         std.debug.print("Multiply: {}\n", .{multiply_result});
     }
 }

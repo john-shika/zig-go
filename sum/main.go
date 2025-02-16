@@ -12,4 +12,5 @@ func Sum(a, b C.int) C.int {
 
 func main() {
 	fmt.Println("Hello from Go Sum Library")
+	<- make(chan int)
 }
